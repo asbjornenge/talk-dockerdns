@@ -1,0 +1,24 @@
+{
+  "name": "talk-dockerdns",
+  "version": "0.0.0",
+  "description": "Talk on dns for service discrovery with docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/asbjornenge/talk-dockerdns.git"
+  },
+  "keywords": [
+    "talk"
+  ],
+  "author": "Asbjorn Enge <asbjorn@hanafjedle.net>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/asbjornenge/talk-dockerdns/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.5.2"
+  }
+}
