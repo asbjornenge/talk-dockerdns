@@ -19,6 +19,8 @@
     "url": "https://github.com/asbjornenge/talk-dockerdns/issues"
   },
   "devDependencies": {
-    "gulp": "~3.5.2"
+    "gulp": "~3.5.2",
+    "tiny-lr": "0.0.5",
+    "express": "~3.4.8"
   }
 }
