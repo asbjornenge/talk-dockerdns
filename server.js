@@ -8,9 +8,10 @@ var gaze    = require('gaze')
  */
 
 gulp.tasks.copystatic.fn()
+gulp.tasks.sass.fn()
 
 var app = express()
- .use(express.static(__dirname + '/' + conf.src))
+ .use(express.static(__dirname + '/' + conf.dist))
  .listen(conf.port, function(){
   console.log('Server running at http://localhost:'+conf.port);
 });
