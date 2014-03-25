@@ -21,6 +21,11 @@
   "devDependencies": {
     "gulp": "~3.5.2",
     "tiny-lr": "0.0.5",
-    "express": "~3.4.8"
+    "express": "~3.5.0",
+    "metalsmith": "~0.5.0",
+    "metalsmith-watch": "0.0.2"
+  },
+  "dependencies": {
+    "gaze": "~0.5.1"
   }
 }

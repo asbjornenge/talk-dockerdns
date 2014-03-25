@@ -1,14 +1,11 @@
-var gulp = require('gulp'),
-    lr = require('tiny-lr'),
-    server = lr();
+var gulp = require('gulp')
+var root = 'src'
+var dist = 'dist'
 
-var SERVER_PORT = 4000;
-var SERVER_ROOT = 'assets';
-var LIVERELOAD_PORT = 35729;
-
-function startExpress() {
-
-}
+gulp.task('copystatic', function() {
+    gulp.src('./'+root+'/index.html')
+            .pipe(gulp.dest('./'+dist));
+})
 
 /** WATCH **/
 
