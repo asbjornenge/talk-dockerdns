@@ -19,7 +19,7 @@ livereload = require('livereload');
 server = livereload.createServer();
 server.watch(__dirname + '/' + conf.dist);
 
-gaze('./'+conf.src+'/**', function(err, watcher) {
+gaze(['src/*.html','src/*.svg'], function(err, watcher) {
     this.on('all', function(event, filepath) {
         gulp.tasks.copystatic.fn()
     })
