@@ -31,3 +31,8 @@ gaze(['src/sass/*.scss'], function(err, watcher) {
         gulp.tasks.sass.fn()
     })
 })
+gaze(['src/js/*.js'], function(err, watcher) {
+    this.on('all', function(event, filepath) {
+        gulp.tasks.scripts.fn()
+    })
+})
