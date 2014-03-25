@@ -7,8 +7,9 @@ var gaze    = require('gaze')
  * App.
  */
 
-gulp.tasks.copystatic.fn()
-gulp.tasks.sass.fn()
+gulp.tasks.default.dep.forEach(function(task) {
+    gulp.tasks[task].fn()
+})
 
 var app = express()
  .use(express.static(__dirname + '/' + conf.dist))
@@ -23,5 +24,10 @@ server.watch(__dirname + '/' + conf.dist);
 gaze(['src/*.html','src/*.svg'], function(err, watcher) {
     this.on('all', function(event, filepath) {
         gulp.tasks.copystatic.fn()
+    })
+})
+gaze(['src/sass/*.scss'], function(err, watcher) {
+    this.on('all', function(event, filepath) {
+        gulp.tasks.sass.fn()
     })
 })
