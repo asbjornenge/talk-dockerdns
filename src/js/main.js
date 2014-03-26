@@ -1,23 +1,8 @@
+var Presentation = require('./presentation')
 
 if (window.location.hash === "") window.location.hash = "#1";
 
-var p = function() {}
-p.prototype.replace_hash = function(page) {
-    if (page < 0) return
-    window.location.hash = "#"+page
-}
-p.prototype.navigate = function(to) {
-    switch(to) {
-        case 'right':
-            this.replace_hash(parseInt(window.location.hash.split('#')[1])+1)
-            break;
-        case 'left':
-            this.replace_hash(parseInt(window.location.hash.split('#')[1])-1)
-            break;
-    }
-};
-
-var presentation = new p();
+var presentation = new Presentation();
 
 document.body.onkeydown = function(e) {
     switch(e.which) {

@@ -1,9 +1,11 @@
-var gulp      = require('gulp')
-var conf      = require('./conf')
-var sass      = require('gulp-sass');
-var minifyCSS = require('gulp-minify-css');
-var rename    = require("gulp-rename");
-var uglify    = require('gulp-uglify');
+var gulp       = require('gulp')
+var conf       = require('./conf')
+var sass       = require('gulp-sass')
+var minifyCSS  = require('gulp-minify-css')
+var rename     = require("gulp-rename")
+var uglify     = require('gulp-uglify')
+var browserify = require('gulp-browserify')
+var concat     = require('gulp-concat')
 
 gulp.task('copystatic', function() {
     return gulp.src([conf.src+'/*.html',conf.src+'/*.svg'])
@@ -18,12 +20,15 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(conf.dist))
 })
 
-gulp.task('scripts', function() {
-  gulp.src(conf.src+'/js/*.js')
-    .pipe(uglify({outSourceMap: true}))
-    .pipe(gulp.dest(conf.dist))
+gulp.task('browserify', function() {
+    gulp.src(conf.src+'/js/main.js')
+        .pipe(browserify({
+            debug     : true,
+        }))
+        // .pipe(uglify())
+        .pipe(gulp.dest(conf.dist))
 });
 
-gulp.task('default', ['copystatic','sass','scripts'])
+gulp.task('default', ['copystatic','sass','browserify'])
 
 module.exports = gulp;
