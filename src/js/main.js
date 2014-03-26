@@ -1,9 +1,16 @@
+/**
+ *  Main
+ */
+
 var Presentation = require('./presentation')
+var min = 1;
+var max = 10;
 
-if (window.location.hash === "") window.location.hash = "#1";
+/** Init **/
 
-var presentation = new Presentation();
-
+if (window.location.hash === "") window.location.hash = "#"+min;
+var presentation = new Presentation(min, max);
+presentation.show(window.location.hash.split('#')[1])
 document.body.onkeydown = function(e) {
     switch(e.which) {
         case 39:

@@ -23,7 +23,7 @@ gulp.task('sass', function () {
 gulp.task('browserify', function() {
     gulp.src(conf.src+'/js/main.js')
         .pipe(browserify({
-            debug     : true,
+            debug : false,
         }))
         // .pipe(uglify())
         .pipe(gulp.dest(conf.dist))
