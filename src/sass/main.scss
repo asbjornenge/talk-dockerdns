@@ -1,3 +1,94 @@
 body {
     background-color : pink;
 }
+
+$container-width  : 1000px;
+$container-height : 1000px;
+
+#container {
+    width      : $container-width;
+    height     : $container-height;
+    margin     : auto;
+    border     : 1px solid red;
+    position   : relative;
+}
+
+$whale-width  : 419px;
+$whale-height : 228px;
+
+#dockerwhale {
+    display  : none;
+    position : absolute;
+    width    : $whale-width;
+    height   : $whale-height;
+    background-image : url(whale.svg);
+    transition : 0.3s;
+
+    &.page1 {
+        display  : block;
+        right    : 0;
+        top      : $container-height/3;
+        -webkit-animation-name:             wave; 
+        -webkit-animation-duration:         3s; 
+        -webkit-animation-iteration-count:  infinite;
+        -webkit-transition-timing-function: linear;
+    }
+
+    &.page2 {
+        display  : block;
+        right    : $container-width/2 - $whale-width/2 - $container-width/20;
+        top      : $container-height/3.5;
+    }
+}
+
+@-webkit-keyframes wave{
+  0%{
+    -webkit-transform: rotate(-10deg);
+  }
+  50%{ 
+    -webkit-transform: rotate(10deg);
+  }
+  100%{ 
+    -webkit-transform: rotate(-10deg);
+  }
+}
+
+@-webkit-keyframes container-wave{
+  0%{
+    -webkit-transform: translateY(-10px) rotate(-10deg);
+  }
+  50%{ 
+    -webkit-transform: translateX(10px) translateY(10px) rotate(10deg);
+  }
+  100%{ 
+    -webkit-transform: translateY(-10px) rotate(-10deg);
+  }
+}
+
+$docker-container-width  : 50px;
+$docker-container-height : 50px;
+
+#container1 {
+    display  : none;
+    position : absolute;
+    width    : $docker-container-width;
+    height   : $docker-container-height;
+    background-image : url(container.svg);
+    transition : 0.3s;
+
+    &.page1 {
+        display  : block;
+        right    : $whale-width/3;
+        top      : $container-height/3 + 38;
+        -webkit-animation-name:             container-wave; 
+        -webkit-animation-duration:         3s; 
+        -webkit-animation-iteration-count:  infinite;
+        -webkit-transition-timing-function: linear;
+    }
+
+    &.page2 {
+        display  : block;
+        right    : $container-width/2 - $whale-width/2 - $container-width/20 + $whale-width/3;
+        top      : $container-height/3.5 + 40;
+    }    
+}
