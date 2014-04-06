@@ -2,7 +2,7 @@
  *  Presentation
  */
 
-var dom = require('./nanodom')
+var dom = require('nanodom')
 
 var presentation = function(min, max) {
     this.min = min;
@@ -33,9 +33,9 @@ presentation.prototype.navigate = function(to) {
 }
 presentation.prototype.show = function(page) {
     if (page === this.current_page()) return
-    dom('#container .element').forEach(function(element) {
-        element.setAttribute('class','element')
-        dom(element).addClass('page'+page)
+    dom('#container .element').each(function(e) {
+        e.setAttribute('class','element')
+        e.classList.add('page'+page)
     })
 }
 

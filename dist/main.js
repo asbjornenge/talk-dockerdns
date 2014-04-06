@@ -1,4 +1,24 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+function dom() {}
+dom.prototype             = new Array;
+dom.prototype.append      = function(element)   { element.forEach(function(e) { this[0].appendChild(e) }.bind(this)); return this }
+dom.prototype.remove      = function()          { this.forEach(function(e) {e.parentNode.removeChild(e)}); return this }
+dom.prototype.prepend     = function(element)   { element.forEach(function(e) { this[0].insertBefore(e, (this[0].hasChildNodes()) ? this[0].childNodes[0] : null) }.bind(this)); return this }
+dom.prototype.each        = function(fn)        { this.forEach(fn); return this }
+
+function domify(str) { var d = document.createElement('div'); d.innerHTML = str; return d.childNodes }
+
+module.exports = function(selector) {
+    if (selector instanceof dom) return selector
+    if (selector instanceof HTMLElement) {var d = new dom(); d.push(selector); return d}
+    if (typeof selector !== 'string') return
+    var s, d=new dom(), c=(selector.indexOf('<') == 0);
+    s = c ? domify(selector) : document.querySelectorAll(selector);
+    [].slice.call(s).forEach(function(e) {d.push(e)})
+    return d
+}
+
+},{}],2:[function(require,module,exports){
 /**
  *  Main
  */
@@ -22,40 +42,12 @@ document.body.onkeydown = function(e) {
             break;
     }
 }
-},{"./presentation":3}],2:[function(require,module,exports){
-function dom() {}
-dom.prototype             = new Array;
-dom.prototype.append      = function(element)   { element.map(function(e) { this[0].appendChild(e) }.bind(this)); return this}
-dom.prototype.remove      = function()          { this.map(function(e) {e.parentNode.removeChild(e)}); return this}
-dom.prototype.prepend     = function(element)   { element.map(function(e) { this[0].insertBefore(e, this[0].childNodes[0]) }.bind(this)); return this}
-dom.prototype.empty       = function(elements)  { this.map(function(e) { e.innerHTML = ""}); return this}
-dom.prototype.addClass    = function(classes)   { this.map(function(e) { e.className += ' '+classes}); return this}
-dom.prototype.removeClass = function(classes)   {
-    this.map(function(e) {
-        e.className = e.className.split(' ').reduce(function(prev, cls) {
-                return (classes.indexOf(cls) < 0) ? prev.concat(cls) : prev;
-        },[]).join(' ');
-    })
-    return this
-}
-
-function domify(str)   { var d = document.createElement('div'); d.innerHTML = str; return d.childNodes }
-
-module.exports = function(selector) {
-    if (selector instanceof dom) return selector
-    if (selector instanceof HTMLElement) {var d = new dom(); d.push(selector); return d}
-    if (typeof selector !== 'string') return
-    var s, d=new dom(), c=(selector.indexOf('<') == 0);
-    s = c ? domify(selector) : document.querySelectorAll(selector);
-    [].slice.call(s).map(function(e) {d.push(e)})
-    return d
-}
-},{}],3:[function(require,module,exports){
+},{"./presentation":3}],3:[function(require,module,exports){
 /**
  *  Presentation
  */
 
-var dom = require('./nanodom')
+var dom = require('nanodom')
 
 var presentation = function(min, max) {
     this.min = min;
@@ -86,11 +78,11 @@ presentation.prototype.navigate = function(to) {
 }
 presentation.prototype.show = function(page) {
     if (page === this.current_page()) return
-    dom('#container .element').forEach(function(element) {
-        element.setAttribute('class','element')
-        dom(element).addClass('page'+page)
+    dom('#container .element').each(function(e) {
+        e.setAttribute('class','element')
+        e.classList.add('page'+page)
     })
 }
 
 module.exports = presentation
-},{"./nanodom":2}]},{},[1])
+},{"nanodom":1}]},{},[2])
